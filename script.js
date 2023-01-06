@@ -40,13 +40,6 @@ startQuiz.addEventListener("click", function() {
 // separation of concerns- break down
 // 3. click answer- get value off button -> data attributes
 
-// Clear highscores- empties the div
-var clearScores = document.getElementById("#clear");
-clearScores.addEventListener("click", function () {
-  document.getElementById("#highscores").innerHTML = "";
-}
-);
-
 // clicking a button
 // starting a timer
 // appending things to page
@@ -65,29 +58,29 @@ var userScore = 0;
 var questions = [
   {
     q: "The concat method combines which items?",
-    answers: ["Arrays", "Functions", "Booleans", "Numbers"],
-    a: "Arrays"
+    answers: ["1. Arrays", "2. Functions", "3. Booleans", "4. Numbers"],
+    a: "1. Arrays"
   },
   {
     q: "What does the strict equality operator compare?",
-    answers: ["Type", "Value", "Both type and value", "None of the above"],
-    a: "Both type and value"
+    answers: ["1. Type", "2. Value", "3. Both type and value", "4. None of the above"],
+    a: "3. Both type and value"
   },
   {
     q: "What method should you use during development to make sure you are targeting what you want?",
-    answers: ["function()", "console.log()", "debug()", "array.length"],
-    a: "console.log()"
+    answers: ["1. function()", "2. console.log()", "3. debug()", "4. array.length"],
+    a: "2. console.log()"
   },
   {
     q: "What is a for loop used for?",
-    answers: ["Repeat functions", "Loop methods", "Log to the console", "Iterate over arrays"],
-    a: "Iterate over arrays"
+    answers: ["1. Repeat functions", "2. Loop methods", "3. Log to the console", "4. Iterate over arrays"],
+    a: "4. Iterate over arrays"
   },
   {
     q: "How do you create a function in JavaScript?",
-    answers: ["function functionName()", "function: functionName", "function = functionName", "none of the above"],
-    a: "function functionName()"
-  },
+    answers: ["1. function functionName()", "2. function: functionName", "3. function = functionName", "4. none of the above"],
+    a: "1. function functionName()"
+  }
 ];
 
 // Loop over these questions- put question in question div
@@ -95,10 +88,12 @@ var questions = [
 // Questions: 0, answers 
 
 start = (i) => {
+  qDiv.innerHTML = "";
   // pass in question index 
-  qDiv.textContent = questions[i].a
   // loop over the questions[i].answers
-  for (var i = 0; i < questions.length; i++)
+  for (var i = 0; i < questions.length; i++) {
+    qDiv.textContent = questions[i].a
+  };
   // Append these to the answers div
   // aDiv.textContent = 
   // loop over answers and append --NOT A FOR LOOP
@@ -109,3 +104,10 @@ start = (i) => {
 
 // When you call start, pass in QIndex
 start(QIndex)
+
+// Clear highscores- empties the div
+var clearScores = document.getElementById("#clear");
+clearScores.addEventListener("click", function () {
+  document.getElementById("#highscores").innerHTML = "";
+}
+);
