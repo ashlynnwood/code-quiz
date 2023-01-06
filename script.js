@@ -52,7 +52,7 @@ startQuiz.addEventListener("click", function() {
 // 2. possible ANSWERS (array)
 // 3. correct answer
 
-var QIndex = 0;
+var qIndex = 0;
 var userScore = 0;
 
 var questions = [
@@ -87,13 +87,23 @@ var questions = [
 // Loop over answers
 // Questions: 0, answers 
 
-start = (i) => {
+// start = (qIndex) => {
+  function start(qIndex) {
   qDiv.innerHTML = "";
   // pass in question index 
   // loop over the questions[i].answers
   for (var i = 0; i < questions.length; i++) {
-    qDiv.textContent = questions[i].a
-  };
+    var currentQ = questions[qIndex].q
+    var currentAs = questions[qIndex].answers
+    qDiv.textContent = currentQ;
+    // qDiv.textContent = questions[i].a
+  }
+   currentAs.forEach(function(currentAs) {
+      var answerList = document.createElement("li");
+      answerList.textContent = currentAs;
+      qDiv.appendChild(answerList);
+   })
+  ;
   // Append these to the answers div
   // aDiv.textContent = 
   // loop over answers and append --NOT A FOR LOOP
@@ -103,7 +113,10 @@ start = (i) => {
 };
 
 // When you call start, pass in QIndex
-start(QIndex)
+startQuiz.addEventListener("click", function() {
+start(qIndex);
+}
+);
 
 // Clear highscores- empties the div
 var clearScores = document.getElementById("#clear");
