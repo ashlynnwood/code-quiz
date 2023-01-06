@@ -21,11 +21,17 @@ li {
 
 p {
   margin: 20px;
+  font-size: 18px;
 }
 
-#timer {
+h2 {
+  font-size: 40px;
+}
+
+h1.time {
   float: right;
   margin-right: 40px;
+  color: white;
 }
 
 header, footer {
@@ -39,7 +45,19 @@ footer {
   width: 100%
 }
 
-#quiz-card {
+
+#qDiv {
+  display: flex;
+  /* width: 50%; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 70px;
+  padding: 70px;
+  border: 8px dashed #fa9cfa;
+}
+
+#score-list {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,4 +65,13 @@ footer {
   margin: 70px;
   padding: 70px;
   border: 8px dashed #fa9cfa;
+}
+
+button {
+  border-radius: 5px;
+  font-size: 18px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #fa9cfa;
+  padding: 10px 40px
 }
