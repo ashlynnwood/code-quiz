@@ -1,7 +1,33 @@
 // initial click handler- start ()
 // listening to click on start button
+var startQuiz = document.querySelector("#start-btn");
+startQuiz.addEventListener("click", function() {
+  // When click button, empty quiz challenge div
+  document.getElementById("quiz-card").innerHTML = "";
+  }
+);
 
-// when click start button: timer starts, empty quiz challenge div
+// when click start button: timer starts
+var timeEl = document.querySelector(".time");
+var timerEl = document.getElementById("#timer");
+var countDown = 5;
+
+function setTime() {
+  var timerCount = setInterval(function() {
+    countDown--;
+    timeEl.textContent = timerEl + countDown;
+
+    if(countDown === 0) {
+      clearInterval(timerCount);
+    }
+  }, 1000);
+}
+
+startQuiz.addEventListener("click", function() {
+  setTime();
+}
+);
+
 // set inner html of div to string so it will go away on click start
 // innerhtml or text content to empty string often
 

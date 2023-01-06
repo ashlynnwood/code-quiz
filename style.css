@@ -19,6 +19,10 @@ li {
   font-weight: bold;
 }
 
+p {
+  margin: 20px;
+}
+
 #timer {
   float: right;
   margin-right: 40px;
