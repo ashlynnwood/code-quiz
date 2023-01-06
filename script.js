@@ -68,8 +68,8 @@ var questions = [
   },
   {
     q: "What method should you use during development to make sure you are targeting what you want?",
-    answers: ["1. function()", "2. console.log()", "3. debug()", "4. array.length"],
-    a: "2. console.log()"
+    answers: ["1. function( )", "2. console.log( )", "3. debug( )", "4. array.length"],
+    a: "2. console.log( )"
   },
   {
     q: "What is a for loop used for?",
@@ -77,9 +77,9 @@ var questions = [
     a: "4. Iterate over arrays"
   },
   {
-    q: "How do you create a function in JavaScript?",
-    answers: ["1. function functionName()", "2. function: functionName", "3. function = functionName", "4. none of the above"],
-    a: "1. function functionName()"
+    q: "What is vanilla JavaScript?",
+    answers: ["1. The opposite of chocolate JavaScript", "2. Pure JavaScript with no additional libraries", "3. jQuery + Bootstrap + Mongoose", "4. none of the above"],
+    a: "2. Pure JavaScript with no additional libraries"
   }
 ];
 
