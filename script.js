@@ -93,15 +93,18 @@ var questions = [
   // pass in question index 
   // loop over the questions[i].answers
   for (var i = 0; i < questions.length; i++) {
-    var currentQ = questions[qIndex].q
-    var currentAs = questions[qIndex].answers
+    var currentQ = questions[qIndex].q;
+    var currentAs = questions[qIndex].answers;
     qDiv.textContent = currentQ;
-    // qDiv.textContent = questions[i].a
+    // qDiv.textContent = questions[i].answers
   }
-   currentAs.forEach(function(currentAs) {
-      var answerList = document.createElement("li");
-      answerList.textContent = currentAs;
-      qDiv.appendChild(answerList);
+   currentAs.forEach(function(newAs) {
+      var answerList = document.createElement("button");
+      answerList.textContent = newAs;
+      qDiv.append(answerList);
+      answerList.addEventListener("click", function () {
+      start(qIndex);
+      });
    })
   ;
   // Append these to the answers div
