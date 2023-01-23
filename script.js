@@ -1,3 +1,4 @@
+// Pseudocode: 
 // set inner html of div to string so it will go away on click start
 // innerhtml or text content to empty string often
 // then use another function to show something on the page (first question)
@@ -41,7 +42,7 @@ function setTime() {
       clearInterval(timerCount);
       timeEl.textContent = "Time's up!";
       qDiv.innerHTML = "";
-      // endQuiz();
+      endQuiz();
     }
   }, 1000);
 }
@@ -143,7 +144,8 @@ setTimeout(function() {
  
 } else { 
   correctM.innerHTML = "Wrong, try again!"
-  
+  // Subtract 10 seconds from timer if wrong answer
+  // Make sure countdown is greater than penalty so it doesn't give negative values
   if (countDown > penalty) {
   countDown -= penalty;
     }
@@ -154,12 +156,23 @@ setTimeout(function() {
 
 })
 
-// function endQuiz() {
-// if (countDown = 0) {
-//   countDown = 0;
-//   qDiv.innerHTML = "";
-// }
-// };
+function endQuiz() {
+if (countDown = 0 || questions.length === 0) {
+  countDown = 0;
+  qDiv.innerHTML = "";
+}
+  let title = document.createElement("h1");
+    title.textContent = "Game over!"
+  let score = document.createElement ('p');
+    score.textContent = `You scored ${countDown} points. Good job!`
+  let initials = createElement('p');
+    initials.textContent = "Please enter your initials:"
+  let initialInput = document.createElement("input");
+  let highBtn = document.createElement("button");
+    highBtn.innerHTML = "Go to Highscores";
+
+  qDiv.append(title);
+};
 
 
 // When you call start, pass in QIndex
