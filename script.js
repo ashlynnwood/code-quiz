@@ -1,5 +1,20 @@
-// initial click handler- start ()
-// listening to click on start button
+// set inner html of div to string so it will go away on click start
+// innerhtml or text content to empty string often
+// then use another function to show something on the page (first question)
+
+// start running several functions
+// 1. timer
+// 2. updating the page (next question)
+// 3. getting answer (when click one, run another function)
+// separation of concerns- break down
+// 3. click answer- get value off button -> data attributes
+
+// clicking a button
+// starting a timer
+// appending things to page
+
+
+// Global Variables
 var startQuiz = document.querySelector("#start-btn");
 var answerBtn = document.createElement("div");
 var startD = document.querySelector("#startDiv");
@@ -15,7 +30,7 @@ var quizQ = document.querySelector("#quiz-q");
 // when click start button: timer starts
 var timeEl = document.querySelector(".time");
 var timerEl = document.getElementById("#timer");
-var countDown = 76;
+var countDown = 10;
 var penalty = 10;
 
 function setTime() {
@@ -26,6 +41,8 @@ function setTime() {
     if(countDown === 0) {
       clearInterval(timerCount);
       timeEl.textContent = "Time's up!";
+      qDiv.innerHTML = "";
+      // endQuiz();
     }
   }, 1000);
 }
@@ -35,20 +52,6 @@ startQuiz.addEventListener("click", function() {
 }
 );
 
-// set inner html of div to string so it will go away on click start
-// innerhtml or text content to empty string often
-// then use another function to show something on the page (first question)
-
-// start running several functions
-// 1. timer
-// 2. updating the page (next question)
-// 3. getting answer (when click one, run another function)
-// separation of concerns- break down
-// 3. click answer- get value off button -> data attributes
-
-// clicking a button
-// starting a timer
-// appending things to page
 
 // Questions = OBJECTS
 // var questions = array of objects
@@ -127,8 +130,9 @@ var questions = [
  
 answerBtn.addEventListener("click", function(event){
  console.log(event.target.innerHTML);
+//  Checking if user answer is correct
 if (event.target.innerHTML === questions[qIndex].a) {
-  // Show correct
+  // Show correct message
   correctM.innerHTML = "Correct!"
   // Go to next question
   qIndex++;
@@ -140,12 +144,22 @@ setTimeout(function() {
  
 } else { 
   correctM.innerHTML = "Wrong, try again!"
+
   setTimeout(function() {
     correctM.innerHTML = "";
 }, 1000);
 }
 
 })
+
+// function endQuiz() {
+// if (countDown = 0) {
+//   countDown = 0;
+//   qDiv.innerHTML = "";
+// }
+// };
+
+
 // When you call start, pass in QIndex
 startQuiz.addEventListener("click", function() {
 start(qIndex);
