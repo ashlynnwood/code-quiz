@@ -75,3 +75,7 @@ button {
   background-color: #fa9cfa;
   padding: 10px 40px;
 }
+
+.correct {
+  color: #ff00ff;
+}

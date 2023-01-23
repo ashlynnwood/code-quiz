@@ -1,16 +1,22 @@
 // initial click handler- start ()
 // listening to click on start button
 var startQuiz = document.querySelector("#start-btn");
-startQuiz.addEventListener("click", function() {
-  // When click button, empty quiz challenge div
-  document.getElementById("qDiv").innerHTML = "";
-  }
-);
+var answerBtn = document.createElement("div");
+var startD = document.querySelector("#startDiv");
+var correctM = document.querySelector(".correct");
+var quizQ = document.querySelector("#quiz-q");
+
+// startQuiz.addEventListener("click", function() {
+//   // When click button, empty quiz challenge div
+//   document.getElementById("qDiv").innerHTML = "";
+//   }
+// );
 
 // when click start button: timer starts
 var timeEl = document.querySelector(".time");
 var timerEl = document.getElementById("#timer");
 var countDown = 76;
+var penalty = 10;
 
 function setTime() {
   var timerCount = setInterval(function() {
@@ -58,28 +64,28 @@ var userScore = 0;
 var questions = [
   {
     q: "The concat method combines which items?",
-    answers: ["1. Arrays", "2. Functions", "3. Booleans", "4. Numbers"],
-    a: "1. Arrays"
+    answers: ["Arrays", "Functions", "Booleans", "Numbers"],
+    a: "Arrays"
   },
   {
     q: "What does the strict equality operator compare?",
-    answers: ["1. Type", "2. Value", "3. Both type and value", "4. None of the above"],
-    a: "3. Both type and value"
+    answers: ["Type", "Value", "Both type and value", "None of the above"],
+    a: "Both type and value"
   },
   {
     q: "What method should you use during development to make sure you are targeting what you want?",
-    answers: ["1. function( )", "2. console.log( )", "3. debug( )", "4. array.length"],
-    a: "2. console.log( )"
+    answers: ["function( )", "console.log( )", "debug( )", "array.length"],
+    a: "console.log( )"
   },
   {
     q: "What is a for loop used for?",
-    answers: ["1. Repeat functions", "2. Loop methods", "3. Log to the console", "4. Iterate over arrays"],
-    a: "4. Iterate over arrays"
+    answers: ["Repeat functions", "Loop methods", "Log to the console", "Iterate over arrays"],
+    a: "Iterate over arrays"
   },
   {
     q: "What is vanilla JavaScript?",
-    answers: ["1. The opposite of chocolate JavaScript", "2. Pure JavaScript with no additional libraries", "3. jQuery + Bootstrap + Mongoose", "4. none of the above"],
-    a: "2. Pure JavaScript with no additional libraries"
+    answers: ["The opposite of chocolate JavaScript", "Pure JavaScript with no additional libraries", "jQuery + Bootstrap + Mongoose", "none of the above"],
+    a: "Pure JavaScript with no additional libraries"
   }
 ];
 
@@ -89,41 +95,69 @@ var questions = [
 
 // start = (qIndex) => {
   function start(qIndex) {
-  qDiv.innerHTML = "";
+  startD.style.display = "none";
+  answerBtn.innerHTML = "";
   // pass in question index 
   // loop over the questions[i].answers
-  for (var i = 0; i < questions.length; i++) {
-    var currentQ = questions[qIndex].q;
+  // for (var i = 0; i < questions.length; i++) {
+
+    quizQ.textContent = questions[qIndex].q;
     var currentAs = questions[qIndex].answers;
-    qDiv.textContent = currentQ;
+    
     // qDiv.textContent = questions[i].answers
-  }
+  // }
+   // Append these to the answers div
+  // aDiv.textContent = 
+  // loop over answers and append --NOT A FOR LOOP
+  qDiv.append(answerBtn);
    currentAs.forEach(function(newAs) {
       var answerList = document.createElement("button");
       answerList.textContent = newAs;
-      qDiv.append(answerList);
+      answerBtn.append(answerList);
       answerList.addEventListener("click", function () {
       start(qIndex);
       });
    })
-  ;
-  // Append these to the answers div
-  // aDiv.textContent = 
-  // loop over answers and append --NOT A FOR LOOP
+  ; 
+  
   // use functions- every time you click button -> go to next question
   // -> bump index up -> show next question
   // keep track with count/index
 };
+ 
+answerBtn.addEventListener("click", function(event){
+ console.log(event.target.innerHTML);
+if (event.target.innerHTML === questions[qIndex].a) {
+  // Show correct
+  correctM.innerHTML = "Correct!"
+  // Go to next question
+  qIndex++;
+start(qIndex);
+setTimeout(function() {
+  correctM.innerHTML = "";
+}, 1000);
+ 
+ 
+} else { 
+  correctM.innerHTML = "Wrong, try again!"
+  setTimeout(function() {
+    correctM.innerHTML = "";
+}, 1000);
+}
 
+})
 // When you call start, pass in QIndex
 startQuiz.addEventListener("click", function() {
 start(qIndex);
 }
 );
 
-// Clear highscores- empties the div
-var clearScores = document.getElementById("#clear");
-clearScores.addEventListener("click", function () {
-  document.getElementById("#highscores").innerHTML = "";
-}
-);
+
+// Highscore label form input
+// var createForm = document.createElement
+// // Clear highscores- empties the div
+// var clearScores = document.getElementById("#clear");
+// clearScores.addEventListener("click", function () {
+//   document.getElementById("#highscores").innerHTML = "";
+// }
+// );
