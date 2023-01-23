@@ -29,8 +29,7 @@ var quizQ = document.querySelector("#quiz-q");
 
 // when click start button: timer starts
 var timeEl = document.querySelector(".time");
-var timerEl = document.getElementById("#timer");
-var countDown = 10;
+var countDown = 76;
 var penalty = 10;
 
 function setTime() {
@@ -144,7 +143,10 @@ setTimeout(function() {
  
 } else { 
   correctM.innerHTML = "Wrong, try again!"
-
+  
+  if (countDown > penalty) {
+  countDown -= penalty;
+    }
   setTimeout(function() {
     correctM.innerHTML = "";
 }, 1000);
