@@ -30,7 +30,7 @@ var quizQ = document.querySelector("#quiz-q");
 
 // when click start button: timer starts
 var timeEl = document.querySelector(".time");
-var countDown = 76;
+var countDown = 10;
 var penalty = 10;
 
 function setTime() {
@@ -157,21 +157,21 @@ setTimeout(function() {
 })
 
 function endQuiz() {
-if (countDown = 0 || questions.length === 0) {
+if (countDown === 0 || questions.length === 0) {
   countDown = 0;
   qDiv.innerHTML = "";
 }
   let title = document.createElement("h1");
     title.textContent = "Game over!"
   let score = document.createElement ('p');
-    score.textContent = `You scored ${countDown} points. Good job!`
-  let initials = createElement('p');
+    score.textContent = `You scored ${countDown} points.`
+  let initials = document.createElement('p');
     initials.textContent = "Please enter your initials:"
   let initialInput = document.createElement("input");
   let highBtn = document.createElement("button");
     highBtn.innerHTML = "Go to Highscores";
 
-  qDiv.append(title);
+  qDiv.append(title, score, initials, initialInput, highBtn);
 };
 
 
@@ -184,9 +184,9 @@ start(qIndex);
 
 // Highscore label form input
 // var createForm = document.createElement
-// // Clear highscores- empties the div
-// var clearScores = document.getElementById("#clear");
-// clearScores.addEventListener("click", function () {
-//   document.getElementById("#highscores").innerHTML = "";
-// }
-// );
+// Clear highscores- empties the div
+var clearScores = document.getElementById("#clear");
+clearScores.addEventListener("click", function () {
+  document.getElementById("#highscores").innerHTML = "";
+}
+);
