@@ -182,6 +182,9 @@ if (countDown === 0 || qIndex === questions.length) {
   let highBtn = document.createElement("button");
     highBtn.innerHTML = "Go to Highscores";
     highBtn.addEventListener("click", function(){
+      let userInitials = initialInput.value;
+      let userScore = countDown;
+      localStorage.setItem(userInitials, userScore);
       window.location.href = "highscores.html";
     });
   
