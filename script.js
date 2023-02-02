@@ -8,7 +8,7 @@
 // 2. updating the page (next question)
 // 3. getting answer (when click one, run another function)
 // separation of concerns- break down
-// 3. click answer- get value off button -> data attributes
+// 4. click answer- get value off button -> data attributes
 
 // clicking a button
 // starting a timer
@@ -30,7 +30,7 @@ var quizQ = document.querySelector("#quiz-q");
 
 // when click start button: timer starts
 var timeEl = document.querySelector(".time");
-var countDown = 10;
+var countDown = 30;
 var penalty = 10;
 
 function setTime() {
@@ -38,7 +38,7 @@ function setTime() {
     countDown--;
     timeEl.textContent = "Time: " + countDown;
 
-    if(countDown === 0) {
+    if(countDown === 0 || qIndex === questions.length) {
       clearInterval(timerCount);
       timeEl.textContent = "Time's up!";
       qDiv.innerHTML = "";
@@ -106,6 +106,9 @@ var questions = [
 
     quizQ.textContent = questions[qIndex].q;
     var currentAs = questions[qIndex].answers;
+    if (qIndex === questions.length) {
+      endQuiz();
+    }
     
     // qDiv.textContent = questions[i].answers
   // }
@@ -136,6 +139,9 @@ if (event.target.innerHTML === questions[qIndex].a) {
   correctM.innerHTML = "Correct!"
   // Go to next question
   qIndex++;
+  if (qIndex === questions.length) {
+    endQuiz();
+  }
 start(qIndex);
 setTimeout(function() {
   correctM.innerHTML = "";
@@ -151,14 +157,19 @@ setTimeout(function() {
     }
   setTimeout(function() {
     correctM.innerHTML = "";
-}, 1000);
+  }, 1000);
+  if (qIndex === questions.length) {
+  endQuiz();
+    }
 }
 
 })
 
+// Function to end quiz and display highscore input content when timer hits 0 or run out of questions
 function endQuiz() {
-if (countDown === 0 || questions.length === 0) {
-  countDown = 0;
+if (countDown === 0 || qIndex === questions.length) {
+  // countDown = 0;
+  let userScore = countDown;
   qDiv.innerHTML = "";
 }
   let title = document.createElement("h1");
@@ -170,8 +181,12 @@ if (countDown === 0 || questions.length === 0) {
   let initialInput = document.createElement("input");
   let highBtn = document.createElement("button");
     highBtn.innerHTML = "Go to Highscores";
+  let highLink = document.createElement('a');
+    highLink.href = "highscores.html"
+    // highBtn.append(highLink);
+    highBtn.appendChild(highLink);
 
-  qDiv.append(title, score, initials, initialInput, highBtn);
+  qDiv.append(title, score, initials, initialInput, highBtn, highLink);
 };
 
 
