@@ -181,12 +181,12 @@ if (countDown === 0 || qIndex === questions.length) {
   let initialInput = document.createElement("input");
   let highBtn = document.createElement("button");
     highBtn.innerHTML = "Go to Highscores";
-  let highLink = document.createElement('a');
-    highLink.href = "highscores.html"
-    // highBtn.append(highLink);
-    highBtn.appendChild(highLink);
+    highBtn.addEventListener("click", function(){
+      window.location.href = "highscores.html";
+    });
+  
 
-  qDiv.append(title, score, initials, initialInput, highBtn, highLink);
+  qDiv.append(title, score, initials, initialInput, highBtn);
 };
 
 
