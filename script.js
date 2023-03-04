@@ -1,40 +1,20 @@
-// Pseudocode: 
-// set inner html of div to string so it will go away on click start
-// innerhtml or text content to empty string often
-// then use another function to show something on the page (first question)
-
-// start running several functions
-// 1. timer
-// 2. updating the page (next question)
-// 3. getting answer (when click one, run another function)
-// separation of concerns- break down
-// 4. click answer- get value off button -> data attributes
-
-// clicking a button
-// starting a timer
-// appending things to page
-
-
 // Global Variables
-var startQuiz = document.querySelector("#start-btn");
-var answerBtn = document.createElement("div");
-var startD = document.querySelector("#startDiv");
-var correctM = document.querySelector(".correct");
-var quizQ = document.querySelector("#quiz-q");
+const startQuiz = document.querySelector("#start-btn");
+const answerBtn = document.createElement("div");
+const startD = document.querySelector("#startDiv");
+const correctM = document.querySelector(".correct");
+const quizQ = document.querySelector("#quiz-q");
+let highScore1 = JSON.parse(localStorage.getItem("highscores"))||[];
 
-// startQuiz.addEventListener("click", function() {
-//   // When click button, empty quiz challenge div
-//   document.getElementById("qDiv").innerHTML = "";
-//   }
-// );
+
 
 // when click start button: timer starts
-var timeEl = document.querySelector(".time");
-var countDown = 30;
-var penalty = 10;
+const timeEl = document.querySelector(".time");
+let countDown = 70;
+let penalty = 10;
 
 function setTime() {
-  var timerCount = setInterval(function() {
+  let timerCount = setInterval(function() {
     countDown--;
     timeEl.textContent = "Time: " + countDown;
 
@@ -51,15 +31,6 @@ startQuiz.addEventListener("click", function() {
   setTime();
 }
 );
-
-
-// Questions = OBJECTS
-// var questions = array of objects
-
-// Each question object has:
-// 1. the question itself (object-first thing in array)
-// 2. possible ANSWERS (array)
-// 3. correct answer
 
 var qIndex = 0;
 var userScore = 0;
@@ -92,29 +63,16 @@ var questions = [
   }
 ];
 
-// Loop over these questions- put question in question div
-// Loop over answers
-// Questions: 0, answers 
-
-// start = (qIndex) => {
   function start(qIndex) {
   startD.style.display = "none";
   answerBtn.innerHTML = "";
-  // pass in question index 
-  // loop over the questions[i].answers
-  // for (var i = 0; i < questions.length; i++) {
 
     quizQ.textContent = questions[qIndex].q;
-    var currentAs = questions[qIndex].answers;
+    let currentAs = questions[qIndex].answers;
     if (qIndex === questions.length) {
       endQuiz();
     }
     
-    // qDiv.textContent = questions[i].answers
-  // }
-   // Append these to the answers div
-  // aDiv.textContent = 
-  // loop over answers and append --NOT A FOR LOOP
   qDiv.append(answerBtn);
    currentAs.forEach(function(newAs) {
       var answerList = document.createElement("button");
@@ -123,55 +81,49 @@ var questions = [
       answerList.addEventListener("click", function () {
       start(qIndex);
       });
-   })
-  ; 
-  
-  // use functions- every time you click button -> go to next question
-  // -> bump index up -> show next question
-  // keep track with count/index
+   });
 };
  
 answerBtn.addEventListener("click", function(event){
  console.log(event.target.innerHTML);
-//  Checking if user answer is correct
-if (event.target.innerHTML === questions[qIndex].a) {
-  // Show correct message
-  correctM.innerHTML = "Correct!"
-  // Go to next question
-  qIndex++;
-  if (qIndex === questions.length) {
-    endQuiz();
-  }
-start(qIndex);
-setTimeout(function() {
-  correctM.innerHTML = "";
-}, 1000);
+    //  Checking if user answer is correct
+    if (event.target.innerHTML === questions[qIndex].a) {
+        // Show correct message
+        correctM.innerHTML = "Correct!"
+        // Go to next question
+        qIndex++;
+        if (qIndex === questions.length) {
+          endQuiz();
+        }
+      start(qIndex);
+      setTimeout(function() {
+          correctM.innerHTML = "";
+      }, 1000);
  
  
-} else { 
-  correctM.innerHTML = "Wrong, try again!"
-  // Subtract 10 seconds from timer if wrong answer
-  // Make sure countdown is greater than penalty so it doesn't give negative values
-  if (countDown > penalty) {
-  countDown -= penalty;
+    } else { 
+      correctM.innerHTML = "Wrong, try again!"
+      // Subtract 10 seconds from timer if wrong answer
+      // Make sure countdown is greater than penalty so it doesn't give negative values
+      if (countDown > penalty) {
+        countDown -= penalty;
+      }
+      setTimeout(function() {
+        correctM.innerHTML = "";
+      }, 1000);
+      if (qIndex === questions.length) {
+        endQuiz();
+      }
     }
-  setTimeout(function() {
-    correctM.innerHTML = "";
-  }, 1000);
-  if (qIndex === questions.length) {
-  endQuiz();
-    }
-}
-
-})
+});
 
 // Function to end quiz and display highscore input content when timer hits 0 or run out of questions
 function endQuiz() {
-if (countDown === 0 || qIndex === questions.length) {
-  // countDown = 0;
-  let userScore = countDown;
-  qDiv.innerHTML = "";
-}
+  if (countDown === 0 || qIndex === questions.length) {
+    // countDown = 0;
+    let userScore = countDown;
+    qDiv.innerHTML = "";
+  };
   let title = document.createElement("h1");
     title.textContent = "Game over!"
   let score = document.createElement ('p');
@@ -182,29 +134,16 @@ if (countDown === 0 || qIndex === questions.length) {
   let highBtn = document.createElement("button");
     highBtn.innerHTML = "Go to Highscores";
     highBtn.addEventListener("click", function(){
-      let userInitials = initialInput.value;
-      let userScore = countDown;
-      localStorage.setItem(userInitials, userScore);
+      let scoreData = {initials: initialInput.value, scoreD: countDown }
+      highScore1.push(scoreData)
+      localStorage.setItem("highscores", JSON.stringify(highScore1));
       window.location.href = "highscores.html";
     });
-  
-
   qDiv.append(title, score, initials, initialInput, highBtn);
 };
 
-
 // When you call start, pass in QIndex
 startQuiz.addEventListener("click", function() {
-start(qIndex);
-}
-);
-
-
-// Highscore label form input
-// var createForm = document.createElement
-// Clear highscores- empties the div
-var clearScores = document.getElementById("#clear");
-clearScores.addEventListener("click", function () {
-  document.getElementById("#highscores").innerHTML = "";
-}
-);
+  start(qIndex);
+});
+ 
